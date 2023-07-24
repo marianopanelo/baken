@@ -6,21 +6,25 @@ app.use(express.urlencoded({extended:true}))
 const PORT = 8080
 
 const productos = new producManager()
-const producotsJSON = productos.tranformarJSON()
+const producotsJSON = await productos.tranformarJSON()
 productos.buscarProductoPorId()
+
+app.get ("/" , async (req , res)  =>{
+    res.send (producotsJSON)
+})
 
 
 app.get ("/products" , async (req , res)  =>{
     let limit = Number(req.query.limit)
-    let productosEspera = await producotsJSON
-    let productosPedidos = productosEspera.slice(0,limit)
-    if (!limit) {return  res.send ( productosEspera)}
+    let productosPedidos = producotsJSON.slice(0,limit)
+    if (!limit) {return  res.send ( producotsJSON)}
     else {return  res.send ( productosPedidos)}      
 }    
 )
 
 app.get("/products/:id", async (req , res) =>{
-    let producto = (await productos.buscarProductoPorId(req.params.id) )
+    let producto = await productos.buscarProductoPorId(req.params.id)
+    console.log(producto); 
     res.send (producto) 
 })
 
@@ -28,14 +32,6 @@ app.get("/products/:id", async (req , res) =>{
 app.listen(PORT, ()=>{
 console.log("server abierto");
 })
-
-
-
-/*tuve que poner a index y carrito en scr porque me tiraba error que no encontraba
-la carpeta de carrito y no me dejaba seguir */
-
-
-
 
 
 /* no estria entendiendo porque este codigo no me serviria
