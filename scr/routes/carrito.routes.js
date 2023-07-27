@@ -38,7 +38,7 @@ router.post("/addProductoCarrito/:id", async(req,res)=>{
     console.log(await productos.buscarProductoPorId(productoId));
 
     if (await productos.buscarProductoPorId(productoId) == "producto no encontrado con ese id") {
-        return res.status(400).send({status : "error" ,msj: "no existe producto con ese id"})
+        return res.status(400).send({status : "error" ,msj: "no existe producto con ese id en productos"})
     }else{
     await carito.agregarProductoCarrito(productoId)
     res.send("el producto con el id : " + productoId + " fue agregado" )
