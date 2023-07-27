@@ -5,11 +5,11 @@ import { error } from "console";
 export default class producManager {
     #userDirPath;
     #usersFilePath;
-    #products
+    products
 
     constructor(){
-        this.#products = []
-        this.#userDirPath = "./carrito"
+        this.products = []
+        this.#userDirPath = "./productos"
         this.#usersFilePath = this.#userDirPath + "/productos.json"
         this.fileSystem = fs
     }
@@ -27,13 +27,19 @@ export default class producManager {
             imagen,
             codigo,
             stock,
-            id : producManager.id
+            id : Math.floor(Math.random() * 500 + 1) 
         }
 
-        this.#products.push(carrito)
       
         await this.fileSystem.promises.mkdir(this.#userDirPath,{recursive:true})
-        await this.fileSystem.promises.writeFile(this.#usersFilePath, JSON.stringify(this.#products,null, 2, "/t"))
+        if (!this.fileSystem.existsSync(this.#usersFilePath)){
+            await this.fileSystem.promises.writeFile(this.#usersFilePath, "[]")
+        }
+        
+        let leerArchivo = await this.fileSystem.promises.readFile(this.#usersFilePath, "utf-8")
+        this.products = JSON.parse(leerArchivo)
+        this.products.push(carrito)
+        await this.fileSystem.promises.writeFile(this.#usersFilePath, JSON.stringify(this.products,null, 2, "/t"))
     
     }
 

@@ -1,6 +1,8 @@
 import producManager from "./ProductManager.js"
 
+
 const productos = new producManager()
+
 
 let persistirProducto = async() =>{
     await productos.agregarProducto("fifa 23", "juego de futbol con los equipos conformados en el 2023" , 5000 ,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtxZ3S1MPmgFQbi7JJgi0OUQE2q-m80r72nQ&usqp=CAU","sasb20",5)
@@ -15,5 +17,6 @@ let persistirProducto = async() =>{
     await productos.agregarProducto("jump force", "juego donde se juntan los personajes de manga favoritos para pelear unos contra otros" , 10000 ,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS84-q6nBRaE2eO3ZTyqZnoy66vP5SebxEgUA&usqp=CAU","aea1247",4 )
     await productos.agregarProducto("horizon", "juego donde las maquinas tomaron el control y y vamos por el mapa buscando el porque " , 14000 ,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpB_p6P9iKGYU_C1CZhhgQlQ_0auiPC2FDZA&usqp=CAU","mara71",5 )
 }
+
 
 persistirProducto ()

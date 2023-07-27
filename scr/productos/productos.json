@@ -6,7 +6,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtxZ3S1MPmgFQbi7JJgi0OUQE2q-m80r72nQ&usqp=CAU",
     "codigo": "sasb20",
     "stock": 5,
-    "id": 1
+    "id": 438
   },
   {
     "title": "god of war ragnarok",
@@ -15,7 +15,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1qukk_WJ-oVIeiq5rifSz61hV_GMr5d28Dw&usqp=CAU",
     "codigo": "abl123",
     "stock": 10,
-    "id": 2
+    "id": 295
   },
   {
     "title": "the last of us 2",
@@ -24,7 +24,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMpoRexowvlAvzo50jwHRlnk8fkc3QDh4823Fw8MP9gpCh_H7IoLtB3wZP0WkgMnlqACI&usqp=CAU",
     "codigo": "aza798",
     "stock": 3,
-    "id": 3
+    "id": 60
   },
   {
     "title": "skyrim",
@@ -33,7 +33,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyTPreI5cBzyYbYTT1Yj_ZF3CMp9Ts97oEd2yJnHRGKPiohkwD4EXpdv1g1VVGjn0jGzI&usqp=CAU",
     "codigo": "pepe442",
     "stock": 2,
-    "id": 4
+    "id": 447
   },
   {
     "title": "spider-man",
@@ -42,7 +42,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6b1tOK9PTdxFxox_BsJ6XZZpqAOiNBG3z8g&usqp=CAU",
     "codigo": "atr124",
     "stock": 6,
-    "id": 5
+    "id": 233
   },
   {
     "title": "grand theft auto",
@@ -51,7 +51,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyS__gNx7jDwlX-8HGR_IipG2m3ZnjZufo4g&usqp=CAU",
     "codigo": "bay242",
     "stock": 3,
-    "id": 6
+    "id": 488
   },
   {
     "title": "uncharted 4",
@@ -60,7 +60,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgNybmazV9Jl9KfiqZJ_yZjvMV_LSJHZ9YMQ&usqp=CAU",
     "codigo": "alfa123",
     "stock": 5,
-    "id": 7
+    "id": 195
   },
   {
     "title": "elden ring",
@@ -69,7 +69,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSfj9aT4Rzy2rQlpLnVZ0RJvXQ2YdmF5ArRw&usqp=CAU",
     "codigo": "128beta",
     "stock": 3,
-    "id": 8
+    "id": 34
   },
   {
     "title": "detroit",
@@ -78,7 +78,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeku5yui2ZekBe1BO7Ww4Zo8Mm7YLpkcGfbQ&usqp=CAU",
     "codigo": "zasx352",
     "stock": 5,
-    "id": 9
+    "id": 62
   },
   {
     "title": "jump force",
@@ -87,7 +87,7 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS84-q6nBRaE2eO3ZTyqZnoy66vP5SebxEgUA&usqp=CAU",
     "codigo": "aea1247",
     "stock": 4,
-    "id": 10
+    "id": 85
   },
   {
     "title": "horizon",
@@ -96,6 +96,6 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpB_p6P9iKGYU_C1CZhhgQlQ_0auiPC2FDZA&usqp=CAU",
     "codigo": "mara71",
     "stock": 5,
-    "id": 11
+    "id": 231
   }
 ]
