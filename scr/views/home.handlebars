@@ -1,0 +1,10 @@
+<div>
+    <h1>gracias por elejirnos , su compra va siendo de </h1>
+    {{#each productoCarritoNombre}}
+    <div>
+        <p>id del producto: {{this.id}}</p>
+        <p>cantidad del producto comprado: {{this.cantidad}}</p>
+        <br>
+    </div>
+    {{/each}}
+</div>
