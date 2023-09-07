@@ -27,26 +27,33 @@ router.get ("/" , async (req , res)  =>{
 )
 
 
-/*agregar desde postman */
+/*agregar y sumar desde postman con populate ...costo*/
 router.post("/addProductosNoCarrito" , async(req,res)=>{
     let nuevoProducto = req.body
+    if (!nuevoProducto.codigo){
+        return res.status(400).send({status : "error" ,msj: "valores imncompletos cargar codigo del producto"})
+    }
+
     await carritoModelo.insertMany(nuevoProducto)
     res.send("se agrego el producto con codigo " + nuevoProducto.codigo + " al carrito")
-    let producto = await carritoModelo.findOne({codigo : "bay242"})
-    let producto2 = producto._id
-    let producto3 = await carritoModelo.findOne({_id : producto2})
-    console.log(producto3);
-    //console.log((JSON.stringify(producto, null , `/t`)));
-    let arrayProducto = await productosModelo.findOne({codigo : "bay242"})
-    //let prueba = await productosModelo.findOne({_id : arrayProducto._id})
-    //console.log(prueba);
-    
-    producto.idproducto.push({producto: arrayProducto._id })
+    /*populate */
+    console.log(nuevoProducto.codigo);
+    let productoCarrito = await carritoModelo.findOne({codigo : nuevoProducto.codigo})
+    console.log(productoCarrito);
+    let productoAAgregar = await productosModelo.findOne({codigo : nuevoProducto.codigo})
+    console.log(productoAAgregar);
+    productoCarrito.cantidad.push( {producto : productoAAgregar._id})
+    let resultado = await carritoModelo.updateOne(productoCarrito)
+    console.log(resultado);
+    let carritoYProducto = await carritoModelo.findOne({codigo : nuevoProducto.codigo}).populate(`cantidad.producto`)
+    console.log(JSON.stringify(carritoYProducto, null , `/t`));
 })
 
+/*sumarle la cantidad a los productos ya comprados  */
 router.post("/addProductoCarrito/:id", async(req,res)=>{
     let productoId = parseInt(req.params.id)
-    console.log(await productos.buscarProductoPorId(productoId));
+    let productoCarrito = await carritoModelo.findOne({_id : productoId})
+    console.log(productoCarrito);
 
     if (await productos.buscarProductoPorId(productoId) == "producto no encontrado con ese id") {
         return res.status(400).send({status : "error" ,msj: "no existe producto con ese id"})

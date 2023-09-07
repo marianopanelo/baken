@@ -3,23 +3,20 @@ import mongoosePaginate from "mongoose-paginate-v2"
 
 const carrito = "carts"
 
-
-
 const carritoEsquema = new mongoose.Schema({
-    cantidad : Number,
-    codigo : String ,
-    idproducto : {
+    codigo : String,
+    cantidad : {
         type: [
             {
                 producto: {
-                    type: mongoose.Schema.Types.ObjectId, 
-                    ref: "products"
+                    type : mongoose.Schema.Types.ObjectId,
+                    ref : "products"
                 }
             }
         ],
-        default: []
+        default : []
     }
-});
+})
 
 
 /*carritoEsquema.pre('findOne', function () {
