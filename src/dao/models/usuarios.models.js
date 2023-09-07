@@ -10,7 +10,8 @@ const usuariosEsquema = new mongoose.Schema({
         unique: true
     },
     edad: Number,
-    contraseña: String 
+    contraseña: String ,
+    roll : String
 })
 
 const usuarioModel = mongoose.model(usuarios, usuariosEsquema);

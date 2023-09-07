@@ -29,14 +29,19 @@ router.post("/", async (req, res) => {
     const user = await usuarioModel.findOne({ email, contraseña })
     console.log(req.body);
     console.log("viendo usuario");
-    if (!user) return res.status(401).send({ status: "error", error: "email o contraseña incorrecta, vuelva a intentar" })
-
-    req.session.user = {
-        nombre: `${user.nombre} ${user.apellido}`,
-        email: user.email,
-        edad: user.edad
+    if(user.email == "marianoapanelo@gmail.com" && user.contraseña == 123){
+        console.log(user);
+        let agregar = await usuarioModel.findOne( {_id : user._id} )
+        console.log(agregar);
+        await usuarioModel.updateOne({ _id:agregar._id}, {$set :{roll : "admin"} }  )
+        console.log(user);
+    }else{
+        let agregar = await usuarioModel.findOne( {_id : user._id})
+        console.log(user);
+        console.log(agregar);
+        await usuarioModel.updateOne( {_id:agregar._id}, {$set :{roll : "usuario"} }  )
+        console.log(user);
     }
-    console.log(user);
     res.send({ status: "success", payload: user, message: "¡Primer logueo realizado! :)" });
 });
 
