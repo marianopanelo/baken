@@ -3,11 +3,15 @@ import productosroutes from "./routes/productos.routes.js"
 import carritoroutes from "./routes/carrito.routes.js"
 import viewsroutes from "./routes/views.routes.js"
 import sessionsRouter from "./routes/session.router.js"
+import githubRouter from "./routes/github-login.views.router.js"
 import __dirname from './utils.js';
 import handlebars from 'express-handlebars';
 import mongoose from 'mongoose'
 import session from 'express-session' 
 import MongoStore from "connect-mongo";
+import passport from 'passport';
+import inicializarPassport from "./config/passport.config.js"
+
 
 const conectarConMongo = `mongodb+srv://marianoapanelo:mariano5@cluster0.9gafxeg.mongodb.net/ecommers`
 const app = express ()
@@ -26,6 +30,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static(__dirname + "/public"))
 
 /*rutas */
+app.use("/github", githubRouter);
 app.use('/api/productos', productosroutes);
 app.use('/api/carrito', carritoroutes);
 app.use("/api", sessionsRouter);
@@ -45,9 +50,16 @@ app.use(session({
     saveUninitialized: true, 
 }))
 
+
+inicializarPassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 const abrirServer = app.listen(PORT, ()=>{
     console.log("server abierto");
     })
+
 
 const conectMongoDB = async() =>{
     try {
