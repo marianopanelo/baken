@@ -1,0 +1,6 @@
+capa de routing controlador 
+, dao 
+, vistas 
+separadas responsabilidades separadas hacer los .env para leer bajo la 
+variable de entorno en un archivo config.js
+

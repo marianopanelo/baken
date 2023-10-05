@@ -1,44 +1,53 @@
-import express from "express"
-import productosroutes from "./routes/productos.routes.js"
-import carritoroutes from "./routes/carrito.routes.js"
-import viewsroutes from "./routes/views.routes.js"
-import sessionsRouter from "./routes/session.router.js"
-import githubRouter from "./routes/github-login.views.router.js"
-import __dirname from './utils.js';
+import express from "express"// dejar 
+import productosroutes from "./routes/productos.routes.js"// dejar 
+import carritoroutes from "./routes/carrito.routes.js"// dejar 
+import viewsroutes from "./routes/views.routes.js"// dejar 
+import sessionsRouter from "./routes/session.router.js"// dejar 
+import __dirname from './utils.js';// dejar 
 import handlebars from 'express-handlebars';
 import mongoose from 'mongoose'
 import session from 'express-session' 
 import MongoStore from "connect-mongo";
-import passport from 'passport';
-import inicializarPassport from "./config/passport.config.js"
+import initializePassport from "./config/passport.config.js"
+import passport from "passport"
+import config from "./config/config.js"// dejar 
 
 
+
+// pasar 
 const conectarConMongo = `mongodb+srv://marianoapanelo:mariano5@cluster0.9gafxeg.mongodb.net/ecommers`
+
 const app = express ()
+// pasar 
 const PORT = 8080
+console.log(config.port);
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
-
-/*handlebars */
+/*queda */
 app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars');
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}))
 
-/*donde esta el public */
+
+/*queda */
 app.use(express.static(__dirname + "/public"))
 
+
+
+
 /*rutas */
-app.use("/github", githubRouter);
 app.use('/api/productos', productosroutes);
 app.use('/api/carrito', carritoroutes);
 app.use("/api", sessionsRouter);
 app.use('/', viewsroutes); 
 
+initializePassport ();
+app.use(passport.initialize())
+app.use(passport.session())
 
-
-
+//  pasar
 app.use(session({
     store : MongoStore.create({
         mongoUrl: conectarConMongo ,
@@ -51,16 +60,11 @@ app.use(session({
 }))
 
 
-inicializarPassport();
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 const abrirServer = app.listen(PORT, ()=>{
     console.log("server abierto");
     })
 
-
+    // pasar
 const conectMongoDB = async() =>{
     try {
         await mongoose.connect(conectarConMongo)
