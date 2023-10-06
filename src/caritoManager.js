@@ -14,9 +14,9 @@ export default class caritoManager {
     }
 
     static cantidad = Number()
-
+    
     agregarProductoCarrito = async(id) =>{
-        
+       
         let car = {
             id,
             cantidad : caritoManager.cantidad
@@ -41,6 +41,7 @@ export default class caritoManager {
             this.carrito.push(car)
             await this.fileSystem.promises.writeFile(this.#carritoFilePath, JSON.stringify(this.carrito,null, 2, "/t"))
         }
+        
     }
 
     tranformarCarritoJSON = async () => {

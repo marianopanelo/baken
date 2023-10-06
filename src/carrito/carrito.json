@@ -34,5 +34,33 @@
   {
     "id": 97,
     "cantidad": 1
+  },
+  {
+    "id": 218,
+    "cantidad": 1
+  },
+  {
+    "id": null,
+    "cantidad": 1
+  },
+  {
+    "id": null,
+    "cantidad": 1
+  },
+  {
+    "id": "bay242",
+    "cantidad": 2
+  },
+  {
+    "codigo": "bay242",
+    "cantidad": 2
+  },
+  {
+    "id": "64f138d5e349cc0987a90a32",
+    "cantidad": 2
+  },
+  {
+    "id": "651f6d4ad27aa69fe1d2cc08",
+    "cantidad": 1
   }
 ]

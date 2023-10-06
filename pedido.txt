@@ -5,6 +5,7 @@ Se logueará como superadmin, revisando que el superadmin sí coincida con las v
 Es obligatorio pasar adjunto el archivo .env fuera del repositorio
 
 
+
 carrito = data del carrito 
 config = .env y pasarle las datas de sv, mongo etc y tiene passport 
 controler = funciones de los router
