@@ -3,6 +3,7 @@ import productosroutes from "./routes/productos.routes.js"// dejar
 import carritoroutes from "./routes/carrito.routes.js"// dejar 
 import viewsroutes from "./routes/views.routes.js"// dejar 
 import sessionsRouter from "./routes/session.router.js"// dejar 
+import githubRouter from "./routes/github-login.views.router.js"// dejar
 import __dirname from './utils.js';// dejar 
 import handlebars from 'express-handlebars';
 import mongoose from 'mongoose'
@@ -37,8 +38,7 @@ app.use(passport.session());
 
 
 // pasar 
-const PORT = 8080
-console.log(config.port);
+const PORT = config.port
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
@@ -58,6 +58,7 @@ app.use(express.static(__dirname + "/public"))
 /*rutas */
 app.use('/api/productos', productosroutes);
 app.use('/api/carrito', carritoroutes);
+app.use("/api/github", githubRouter);
 app.use("/api", sessionsRouter);
 app.use('/', viewsroutes); 
 

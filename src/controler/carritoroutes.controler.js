@@ -1,8 +1,6 @@
-import caritoManager from "../caritoManager.js"// cambiar a un manager
 import { carritoModelo } from "../dao/models/carrito.models.js"
 import { productosModelo } from "../dao/models/products.js"
 
-const carito = new caritoManager ()
 
 // listo
 export const getVerCarrito = async(req,res) =>{
