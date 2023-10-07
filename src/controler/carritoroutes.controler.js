@@ -29,17 +29,21 @@ export const postAgregarACarrito = async (req, res) => {
     console.log(productoCarrito);
     /*comparar donde estaba el error */
     await carritoModelo.updateOne({ codigo: nuevoProducto.codigo }, { $set: productoCarrito });
-    console.log(resultado);
     let carritoYProducto = await carritoModelo.findOne({codigo : nuevoProducto.codigo}).populate(`cantidad.producto`)
     console.log(JSON.stringify(carritoYProducto, null, '\t'));
 }
 
 
-// ver este q no termina de salir, para sumar de a uno
+// listo
 export const postSumarCantidadCarrito = async (req, res) => {
     console.log(req.params.id);
     let productoCarrito = await carritoModelo.findOne({_id : req.params.id})
     console.log(productoCarrito);
+    console.log(productoCarrito.cantidad[0].producto);
+    productoCarrito.cantidad.push( {producto : productoCarrito.cantidad[0].producto})
+    let productoCarrito1 = productoCarrito
+    console.log(productoCarrito1);
+    await carritoModelo.updateOne( {_id : req.params.id}, { $set: productoCarrito1 });
 
     if (!productoCarrito) {
         return res.status(400).send({status : "error" ,msj: "no existe producto con ese id"})
@@ -50,7 +54,7 @@ export const postSumarCantidadCarrito = async (req, res) => {
 
 }
 
-/*para cambiar la cantidad del numero tendria q primero poder agregar uno, es el de arriba q me tira error 
+/*falta este
 y con eso le meto un bucle para agregar esa cantidad , sino no me deja cambiar porque tiene un array adentro q me da un id unico en ese */
 export const putModificarCantidad = async (req, res) => {
     let cantidadCambiada = req.body

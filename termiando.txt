@@ -1,2 +1,11 @@
-ruta del carrito
+ruta del carrito // falta 1
 ruta de producto
+ruta de session
+ruta de views 
+volver a hacer para conectar con git aunq no lo pida ... tal vez
+
+routes, listo
+controllers, listo a medias, falta funciones
+dao, esto lo tenog separado ya en realidad
+config, falta, es para conectar con mongo y el sv
+etc.

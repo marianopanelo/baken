@@ -1,19 +1,18 @@
 import mongoose from 'mongoose';
 
-const usuarios = 'usuarios';
+const collection = 'users';
 
-const usuariosEsquema = new mongoose.Schema({
-    nombre: String,
-    apellido: String,
-    email: {
+const schema = new mongoose.Schema({
+    first_name:String,
+    last_name:String,
+    email:{
         type: String,
         unique: true
     },
-    edad: Number,
-    contraseña: String ,
-    roll : String
+    age:Number,
+    password:String 
 })
 
-const usuarioModel = mongoose.model(usuarios, usuariosEsquema);
+const usuarioModel = mongoose.model(collection, schema);
 
 export default usuarioModel;

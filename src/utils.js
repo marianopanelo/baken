@@ -7,8 +7,8 @@ const __dirname = dirname(__filename)
 
 export const crearEncriptado = contraseña => bcrypt.hashSync(contraseña , bcrypt.genSaltSync(10))
 
-export const validacionContraseña = (usuario , contraseña)=>{
-    console.log(`datos a validar: ${usuario.contraseña} ${contraseña}`);
-    return bcrypt.compareSync(contraseña , usuario.contraseña)
+export const validacionContraseña = (user , password)=>{
+    console.log(`datos a validar: ${user.password} ${password}`);
+    return bcrypt.compareSync(password , user.password)
 }
 export default __dirname;

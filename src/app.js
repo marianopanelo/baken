@@ -6,7 +6,7 @@ import sessionsRouter from "./routes/session.router.js"// dejar
 import __dirname from './utils.js';// dejar 
 import handlebars from 'express-handlebars';
 import mongoose from 'mongoose'
-import session from 'express-session' 
+import session from 'express-session' //dejar
 import MongoStore from "connect-mongo";
 import initializePassport from "./config/passport.config.js"
 import passport from "passport"
@@ -18,6 +18,24 @@ import config from "./config/config.js"// dejar
 const conectarConMongo = `mongodb+srv://marianoapanelo:mariano5@cluster0.9gafxeg.mongodb.net/ecommers`
 
 const app = express ()
+
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: conectarConMongo,
+        mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
+        ttl: 10 * 60
+    }),
+    secret: "coderSecret",
+    resave: true,
+    saveUninitialized: true,
+}));
+
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 // pasar 
 const PORT = 8080
 console.log(config.port);
@@ -43,28 +61,15 @@ app.use('/api/carrito', carritoroutes);
 app.use("/api", sessionsRouter);
 app.use('/', viewsroutes); 
 
-initializePassport ();
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 //  pasar
-app.use(session({
-    store : MongoStore.create({
-        mongoUrl: conectarConMongo ,
-        mongoOptions : { useNewUrlParser: true, useUnifiedTopology: true }, 
-        ttl : 10 * 60
-    }),
-    secret:"coderSecret",
-    resave:true, 
-    saveUninitialized: true, 
-}))
 
+app.listen(PORT, () => {
+    console.log(`Servidor abierto en el puerto ${PORT}`);
+});
 
-const abrirServer = app.listen(PORT, ()=>{
-    console.log("server abierto");
-    })
-
-    // pasar
+// pasar
 const conectMongoDB = async() =>{
     try {
         await mongoose.connect(conectarConMongo)

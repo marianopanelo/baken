@@ -4,7 +4,6 @@ form.addEventListener('submit', e => {
     e.preventDefault();
     const data = new FormData(form);
     const obj = {};
-    console.log("hola");
     data.forEach((value, key) => obj[key] = value);
     fetch('/api', {
         method: 'POST',
@@ -15,6 +14,7 @@ form.addEventListener('submit', e => {
     }).then(result => {
         if (result.status === 200) {
             window.location.replace('/api/productos');
+            
         }
     })
 })

@@ -12,31 +12,53 @@ const initializePassport = () => {
 
         { passReqToCallback: true, usernameField: 'email' },
 
-        async (req, usuarionombre, contraseña, done) => {
+        async (req, username, password, done) => {
         
-            const { nombre, apellido, email, edad } = req.body;
+            const { first_name, last_name, email, age } = req.body;
                 try {
-                    const exists = await usuarioModel.findOne( {email} )
+                    const exists = await usuarioModel.findOne({ email })
                     console.log(exists);
                     if (exists) {
                         return res.status(400).send({ status: 'error', message: 'usuario ya existe' })
                     }
                     const user = {
-                        nombre,
-                        apellido,
+                        first_name,
+                        last_name,
                         email,
-                        edad,
-                        contraseña : crearEncriptado(contraseña)
+                        age,
+                        password: crearEncriptado(password)
                     }
                     const result = await usuarioModel.create(user);
-                    res.send({ status: "success", message: "Usuario creado con exito con ID: " + result.id })
+                    
                     return done(null, result)
-            } catch (error) {
+                } catch (error) {
                 return done("Error registrando el usuario: " + error);
             }
         }
 
     ))
+
+    passport.use('login', new localStrategy(
+        { passReqToCallback: true, usernameField: 'email' },
+        async (req, username, password, done) => {
+            try {
+                const user = await usuarioModel.findOne({ email: username })
+                console.log("Usuario encontrado para login:");
+                console.log(user);
+                if (!user) {
+                    console.warn("User doesn't exists with username: " + username);
+                    return done(null, false)
+                }
+                // Validacion de el password
+                if (!validacionContraseña(user, password)) {
+                    return done(null, false)
+                }
+                return done(null, user)
+            } catch (error) {
+                return done(error)
+            }
+        }
+    ));
 
 
 
@@ -46,7 +68,7 @@ const initializePassport = () => {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            let user = await userModel.findById(id);
+            let user = await usuarioModel.findById(id);
             done(null, user);
         } catch (error) {
             console.error("Error deserializando el usuario: " + error);
