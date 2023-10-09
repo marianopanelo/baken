@@ -6,7 +6,6 @@ Es obligatorio pasar adjunto el archivo .env fuera del repositorio
 
 
 que tiene cada carpeta =
-carrito = data del carrito ,borrar en un futuro
 config = .env y pasarle las datas de sv, mongo etc y tiene passport 
 controler = funciones de los router
 dao = los modelos 
