@@ -1,0 +1,26 @@
+que solo el admin , pueda agregar y modificar protudcos
+que el usuario solo pueda agregar cosas al carrito
+hacer q pueda trabajar con otra base de datos , por linea de comandos ... solo dejar en blanco 
+
+no entendi lo de repositori
+
+/current me tiene q traer la data del usuario (esta no  la tenia antes), en esta parte tengo q hacer lo del dto
+para q me traiga nombre y apellido nada mas (esto seria otra ruta , para ver el usuario entiendo)
+
+hacer un tiquet cuando el cliente de a un boton que sea comprar (tiene q guardar fecha y hora ... y el email)
+y hacer otra ruta para ver el proceso final (tengo q ver el stock ).. hasta no finalizar no bajar el numero de stock
+si despues de tocar , no tiene stock , mostrar q no tiene stock
+esto lo puedo actualzar , que cuando diga compra si stock = 0 le hago un fineone y q lo borre y despues me devuelva
+el carrito sin ese producto
+y hacer otro carrito q diga los productos esos q no se compraron o que diga este producto no pudo ser comprado
+tambien puede ser , 
+productos sin stock:
+productos a comprar :
+
+
+hacer dao 
+en servis tengo q poner el nombre de lo que hacer , pero disitnta logica y implementar factory para q se use el que quiero
+esta en la 2 parte de la clase 28
+
+hacer dto
+que de 2 array de datos o de un array entero , solo me devuelva uno que necestio ()

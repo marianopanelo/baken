@@ -1,36 +1,9 @@
-import usuarioModel from "../dao/models/usuarios.models.js";
-import { validacionContraseña } from "../utils.js";
-import config from "../config/config.js"
-
+import { usuariosService } from "../services/factory.js";
 
 export const postLoguinUsuario = async(req,res) =>{
     const { email, contraseña } = req.body;
-    const user = await usuarioModel.findOne({ email })
-    console.log(req.body);
-
-    if(!validacionContraseña(user , contraseña)){
-        return res.status(401).send({ status: "error", error: "Incorrect credentials" });
-    }
-
-    if (!user) return res.status(401).send({ status: "error", error: "Incorrect credentials" });
-    console.log("confirmar usuario y contraseña");
-    /*lo de entrar como admin entiendo q es asi lo q piden , sino no entendi la consegna la verdad  */
-    if(user.email == config.ADMIN_EMAIL && contraseña == config.ADMIN_PASSWORD){
-        console.log(user);
-        let agregar = await usuarioModel.findOne( {_id : user._id} )
-        console.log(agregar);
-        await usuarioModel.updateOne({ _id:agregar._id}, {$set :{roll : "admin"} }  )
-        console.log(user);
-    }
-    
-    else{
-        let agregar = await usuarioModel.findOne( {_id : user._id})
-        console.log(user);
-        console.log(agregar);
-        await usuarioModel.updateOne( {_id:agregar._id}, {$set :{roll : "usuario"} }  )
-        console.log(user);
-    }
-    res.send({ status: "success", payload: user, message: "¡Primer logueo realizado! :)" });
+    let ingresarUsuario = await usuariosService.buscarUsuario(email, contraseña)
+    res.send({ status: "success", payload: ingresarUsuario, message: "¡Primer logueo realizado! :)" });
 }
 
 export const postRegister = async(req,res) =>{

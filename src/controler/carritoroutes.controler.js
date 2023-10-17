@@ -1,10 +1,11 @@
 import { carritoModelo } from "../dao/models/carrito.models.js"
-import { productosModelo } from "../dao/models/products.js"
+//import { productosModelo } from "../dao/models/products.js"
+import { carritoService } from "../services/factory.js"
 
 
 // listo
 export const getVerCarrito = async(req,res) =>{
-    let carritoTotal = await carritoModelo.find()
+    let carritoTotal = await carritoService.vertodos()
     return  res.send ( carritoTotal)
 }
 
@@ -14,63 +15,54 @@ export const postAgregarACarrito = async (req, res) => {
     if (!nuevoProducto.codigo){
         return res.status(400).send({status : "error" ,msj: "valores imncompletos cargar codigo del producto"})
     }
-
-    await carritoModelo.insertMany(nuevoProducto)
+    await carritoService.agregarAlCarrito(nuevoProducto)
     res.send("se agrego el producto con codigo " + nuevoProducto.codigo + " al carrito")
-    /*populate */
-    //console.log(nuevoProducto.codigo);
-    let productoCarrito = await carritoModelo.findOne({codigo : nuevoProducto.codigo})
-    console.log(productoCarrito);
-    let productoAAgregar = await productosModelo.findOne({codigo : nuevoProducto.codigo})
-    //console.log(productoAAgregar);
-    productoCarrito.cantidad.push( {producto : productoAAgregar._id})
-    console.log(productoCarrito);
-    /*comparar donde estaba el error */
-    await carritoModelo.updateOne({ codigo: nuevoProducto.codigo }, { $set: productoCarrito });
-    let carritoYProducto = await carritoModelo.findOne({codigo : nuevoProducto.codigo}).populate(`cantidad.producto`)
-    console.log(JSON.stringify(carritoYProducto, null, '\t'));
+    // no entiendo porque me dejo de entrar al populate , hace 5 minutos lo probe y andaba
+    await carritoService.agregarAlCarritoPopulate(nuevoProducto)
+    console.log(nuevoProducto);
 }
 
 
 // listo
 export const postSumarCantidadCarrito = async (req, res) => {
-    console.log(req.params.id);
-    let productoCarrito = await carritoModelo.findOne({_id : req.params.id})
-    console.log(productoCarrito);
+    let id = req.params.id
+    let productoCarrito = await carritoService.buscarUnProductoCarrito(id)
     console.log(productoCarrito.cantidad[0].producto);
     productoCarrito.cantidad.push( {producto : productoCarrito.cantidad[0].producto})
-    let productoCarrito1 = productoCarrito
-    console.log(productoCarrito1);
-    await carritoModelo.updateOne( {_id : req.params.id}, { $set: productoCarrito1 });
+    let productoCarritoModificado = productoCarrito
+    console.log(productoCarritoModificado);
+
+    await carritoService.modificarUnProductoCarrito(id,productoCarritoModificado);
 
     if (!productoCarrito) {
         return res.status(400).send({status : "error" ,msj: "no existe producto con ese id"})
     }else{
-    await carito.agregarProductoCarrito(req.params.id)
-    res.send("el producto con el id : " + req.params.id + " fue agregado" )
+    await carritoService.buscarUnProductoCarrito(id)
+    res.send("el producto con el id : " + id + " fue agregado" )
     }
 
 }
 
 /*falta este
 y con eso le meto un bucle para agregar esa cantidad , sino no me deja cambiar porque tiene un array adentro q me da un id unico en ese */
-export const putModificarCantidad = async (req, res) => {
+/*export const putModificarCantidad = async (req, res) => {
     let cantidadCambiada = req.body
     console.log(cantidadCambiada);
     console.log(req.params.id);
-    let productoCarritpModificado = await carritoModelo.findOne({_id : req.params.id}/*,{$set : cantidadCambiada}*/)
+    let productoCarritpModificado = await carritoModelo.findOne({_id : req.params.id})//,{$set : cantidadCambiada})
     //console.log(cantidadCambiada);    
     console.log(productoCarritpModificado);
     res.send({status: "completado" , message: `se actualizo la compra con el id ${req.params.id}`, data : productoCarritpModificado})
-}
-// listo
+}*/
+//listo
 export const deleteEliminarProducto = async (req, res) => {
-    await carritoModelo.deleteOne ( {_id : req.params.id} )
+    let id = req.params.id
+    await carritoService.eliminarProducto (id)
     res.send({ status: "Success", message: " el producto con id " + req.params.id + " fue Eliminado del carrito " });
 }
-// listo
+//listo
 export const deleteEliminarcarito = async (req, res) => {
-    await carritoModelo.deleteMany()
+    await carritoService.eliminarTodoElCarrito()
     res.send({ status: "Success", message: " el carrito fue eliminado " });
 }
 // listo

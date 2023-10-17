@@ -1,4 +1,4 @@
-import { deleteEliminarcarito, deleteEliminarProducto, getVerCarrito, handlebars, postAgregarACarrito, postSumarCantidadCarrito, putModificarCantidad } from "../controler/carritoroutes.controler.js";
+import { deleteEliminarcarito, deleteEliminarProducto, getVerCarrito, handlebars, postAgregarACarrito, postSumarCantidadCarrito } from "../controler/carritoroutes.controler.js";
 import { Router, response } from "express";
 
 const router = Router()
@@ -15,7 +15,7 @@ router.post("/addProductoCarrito/:id",postSumarCantidadCarrito)
 
 /*modificar la cantidad con put desde req.body */
 
-router.put("/products/:id" ,putModificarCantidad)
+//router.put("/products/:id" ,putModificarCantidad)
 
 /*eliminar producto seleccionado del carrito*/
 router.delete("/borrarProductoCarrito/:id" ,deleteEliminarProducto) 

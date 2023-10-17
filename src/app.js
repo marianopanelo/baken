@@ -11,7 +11,6 @@ import MongoStore from "connect-mongo";
 import initializePassport from "./config/passport.config.js"
 import passport from "passport"
 import config from "./config/config.js"
-import MongoSingleton from "./config/mongodb.js"
 
 const app = express ()
 
@@ -58,12 +57,3 @@ app.listen(PORT, () => {
 });
 
 
-const mongoInstance = async () =>{
-    try {
-        await MongoSingleton.getIntance() 
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-mongoInstance()
