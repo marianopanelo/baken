@@ -3,7 +3,9 @@ import { usuariosService } from "../services/factory.js";
 export const postLoguinUsuario = async(req,res) =>{
     const { email, contraseña } = req.body;
     let ingresarUsuario = await usuariosService.buscarUsuario(email, contraseña)
-    res.send({ status: "success", payload: ingresarUsuario, message: "¡Primer logueo realizado! :)" });
+    //res.send({ status: "success", payload: ingresarUsuario, message: "¡Primer logueo realizado! " });
+    res.json(ingresarUsuario)
+    console.log(ingresarUsuario);
 }
 
 export const postRegister = async(req,res) =>{

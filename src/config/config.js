@@ -14,5 +14,6 @@ export default {
     MONGO_URL: process.env.MONGO_URL,
     persistence: program.opts().persist,
     ADMIN_EMAIL : process.env.ADMIN_EMAIL ,
-    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD, 
+    role : process.env.role
 }

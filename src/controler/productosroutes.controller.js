@@ -12,7 +12,7 @@ export const getVerProductos = async(req,res) =>{
     else {return  res.send (producto)}      
 }
 
-// listo lo malo de este es q si no pones bien el id , me sale un error que no se como solucionarlo
+// listo 
 export const getBuscarProductoId = async(req,res) =>{
     let id = req.params.id
     let producto =  await productosService.buscarProductoPorId(id)

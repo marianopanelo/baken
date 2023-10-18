@@ -11,7 +11,7 @@ router.post ("/addproduct" ,postAgregarProducto)
 
 router.put("/modificarproducto/:id" ,putModificarProducto)
 
-router.delete ("/borrar/:productoId", deleteBorrarProducto) 
+router.delete ("/borrar/:productoId",deleteBorrarProducto) 
     
 
 export default router;

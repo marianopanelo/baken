@@ -17,6 +17,7 @@ export default class usuariosServisMongo {
     
         if (!user) return res.status(401).send({ status: "error", error: "Incorrect credentials" });
         console.log("confirmar usuario y contraseña");
+        
         /*lo de entrar como admin entiendo q es asi lo q piden , sino no entendi la consegna la verdad  */
         if(user.email == config.ADMIN_EMAIL && contraseña == config.ADMIN_PASSWORD){
             let agregar = await usuarioModel.findOne( {_id : user._id} )
@@ -27,7 +28,7 @@ export default class usuariosServisMongo {
             let agregar = await usuarioModel.findOne( {_id : user._id})
             await usuarioModel.updateOne( {_id:agregar._id}, {$set :{roll : "usuario"} }  )
         }
-    
+       return user 
     }
 
 }
