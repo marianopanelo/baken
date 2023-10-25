@@ -4,6 +4,7 @@ import carritoroutes from "./routes/carrito.routes.js"
 import viewsroutes from "./routes/views.routes.js"
 import sessionsRouter from "./routes/session.router.js"
 import githubRouter from "./routes/github-login.views.router.js"
+import mokingRouter from "./routes/mokingRouter.js" // moking
 import __dirname from './utils.js';
 import handlebars from 'express-handlebars';
 import session from 'express-session' 
@@ -50,6 +51,9 @@ app.use('/api/carrito', carritoroutes);
 app.use("/api/github", githubRouter);
 app.use("/api", sessionsRouter);
 app.use('/', viewsroutes); 
+
+//mocking
+app.use('/api/mockingproducts', mokingRouter);
 
 
 app.listen(PORT, () => {

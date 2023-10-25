@@ -1,6 +1,6 @@
 import { carritoModelo } from "../../../dao/models/carrito.models.js";
 import { productosModelo } from "../../../dao/models/products.js";
-import { productosService } from "../../factory.js";
+import { carritoService, productosService } from "../../factory.js";
 
 
 export default class carritoServiceMongo {
@@ -50,7 +50,7 @@ export default class carritoServiceMongo {
     }
 
     verTiket = async () =>{
-        let carritoTotal = await carritoModelo.find()
+        let carritoTotal = await carritoService.vertodos()
         console.log("los productos comprados son " + carritoTotal.length + " y cada producto tiene esta cantidad");
         let cantidadTotal = 0
         let precioTotal = 0
@@ -60,7 +60,8 @@ export default class carritoServiceMongo {
             let idProducto = carritoTotal[i].cantidad[0].producto
             //console.log(idProducto);
             let pruductos = await productosService.buscarProductoPorId(idProducto)
-            //console.log(pruductos);
+            console.log(pruductos);
+            
             let precioTotalDelArray = (pruductos[0].precio * carritoTotal[i].cantidad.length)
             console.log("precio de un jeugo " + pruductos[0].precio);
             console.log("precio de los mismos juegos " +  precioTotalDelArray);
@@ -70,12 +71,27 @@ export default class carritoServiceMongo {
             console.log("el total a pagar es :" + precioTotal);
             console.log("la cantidad total es: " + cantidadTotal);
             console.log("nombre de los juegos : " + pruductos[0].title);
+            let stock = pruductos[0].stock - carritoTotal[i].cantidad.length;
+            console.log(stock);
+            pruductos[0].stock = stock
+            console.log(pruductos);
+            console.log("verrrrrrrrrrrrrrrrr");
+            if (pruductos[0].stock <= 0) {
+            /*tengo q cambiar lo de stock */    console.log( "el producto " + pruductos[0].nombre + " no tiene suficiente stock , el stock actual es de " + pruductos[0].stock);
+            } else {
+            let id = idProducto
+            console.log(id);
+            let productoCambiado = pruductos
+            console.log(productoCambiado);
+            //nose porque no me los temrina de modificar abajo 
+            await productosService.modificarProducto(id , productoCambiado)
+            }
         }
         return carritoTotal
     }
      
 
 }
-
+//modificarProducto
 //productosService
 //buscarProductoPorId
