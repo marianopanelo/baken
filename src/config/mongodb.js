@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import config from './config.js'
-
+import CustomError from '../services/error/customError.js';
+import EErrors from "../services/error/enumeracionDeError.js";
 
 export default class MongoSingleton {
     static #instance
@@ -20,13 +21,17 @@ export default class MongoSingleton {
     }
 
     #connectMongoDB = async () =>{
-        try {
+        
+        if(config.MONGO_URL != "mongodb+srv://marianoapanelo:mariano5@cluster0.9gafxeg.mongodb.net/ecommers"){
+            CustomError.createError({
+                name: "error al conectar con mongo" , 
+                message: "url ingresada esta mal",
+                code: EErrors.DATABASE_ERROR
+            })
+        }
             await mongoose.connect(config.MONGO_URL) 
             console.log("conectado a mongo");
-        } catch (error) {
-            console.error("no se pudo conectar a mongo");
-            process.exit()
-        }
+ 
     }
 
 

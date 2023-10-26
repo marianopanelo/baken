@@ -1,3 +1,5 @@
+import CustomError from "../services/error/customError.js";
+import EErrors from "../services/error/enumeracionDeError.js";
 import { productosService } from "../services/factory.js"
 
 // listo
@@ -24,8 +26,12 @@ export const postAgregarProducto = async(req,res) =>{
     let nuevoProducto = req.body
     
     if (!nuevoProducto.title || !nuevoProducto.descripcion || !nuevoProducto.precio || !nuevoProducto.imagen || !nuevoProducto.codigo || !nuevoProducto.stock || !nuevoProducto.categoria){
-        return res.status(400).send({status : "error" ,msj: "valores imncompletos cargar title,descripcion,precio,imagen,codigo,stock , revisar datos"})
-    }
+        CustomError.createError({
+            name: "error al agregar producto" , 
+            message: "valores imncompletos cargar title,descripcion,precio,imagen,codigo,stock , revisar datos",
+            code: EErrors.INVALID_TYPES_ERROR
+        })
+        }
     await productosService.agregarProductos(nuevoProducto)
     res.send("el producto " + nuevoProducto.title + " fue creado")
 }

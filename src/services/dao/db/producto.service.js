@@ -1,4 +1,6 @@
 import { productosModelo } from "../../../dao/models/products.js";
+import CustomError from "../../error/customError.js";
+import EErrors from "../../error/enumeracionDeError.js";
 
 
 export default class productosServiceMongo {
@@ -20,7 +22,11 @@ export default class productosServiceMongo {
         console.log(id);
         let producto = await productosModelo.find({_id : id})
         if (!producto){
-            return "no se encontro producto con ese id"
+            CustomError.createError({
+                name: "error al buscar producto" , 
+                message: "revisar id solicitado",
+                code: EErrors.INVALID_TYPES_ERROR
+            })
         }else{
         return producto
         }

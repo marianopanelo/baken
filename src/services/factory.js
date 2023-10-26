@@ -8,7 +8,7 @@ let carritoService
 // conectar cuando poner mongo
 async function initializeMongoService() {
     console.log("Iniciando servicio para MongoDB");
-    try {
+//    try {
         await MongoSingleton.getIntance() /*esto me va decir si tengo mas de una base de datos conectada y a inicializar mongo  */
 
         const { default: usuariosServiceMongo } = await import('./dao/db/usuarios.service.js');
@@ -27,10 +27,10 @@ async function initializeMongoService() {
         
 
 
-    } catch (error) {
-        console.error("Error al iniciar MongoDB:", error);
-        process.exit(1); 
-    }
+//    } catch (error) {
+//        console.error("Error al iniciar MongoDB:", error);
+//        process.exit(1); 
+//   }
 }
 
 switch (config.persistence) {
