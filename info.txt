@@ -1,0 +1,7 @@
+para las pruebas es 
+nodemon src/app.js y nodemon src/app.js --mode admin
+poruqe tengo con admin la parte , no le puse con desarrollo y con logger
+y un puerto corre en el 8080 y otro en el 9090 , igual cada vez q entras a una ruta , te sale una nota de en donde estas 
+
+tengo un problema con los log , que muchos no los tengo con req,res y entiendo q sin eso no puedo usar el req.logger.info
+que lo tendria q usar para cambiar los log , por lo que entendi , o nose como se podria hacer la verdad 

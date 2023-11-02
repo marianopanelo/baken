@@ -1,3 +1,0 @@
-en productos puse el error a buscar un producto y al cargar un producto nuevo
-puse un error al conectarce con mongo 
-en el carrito le puse el error al agregar un producto y al cambiarle la cantidad al producto 

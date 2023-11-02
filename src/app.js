@@ -4,7 +4,8 @@ import carritoroutes from "./routes/carrito.routes.js"
 import viewsroutes from "./routes/views.routes.js"
 import sessionsRouter from "./routes/session.router.js"
 import githubRouter from "./routes/github-login.views.router.js"
-import mokingRouter from "./routes/mokingRouter.js" // moking
+import mokingRouter from "./routes/mokingRouter.js";//moking
+import loggerTestroutes from "./routes/loggerTest.routes.js";//logger
 import __dirname from './utils.js';
 import handlebars from 'express-handlebars';
 import session from 'express-session' 
@@ -12,6 +13,7 @@ import MongoStore from "connect-mongo";
 import initializePassport from "./config/passport.config.js"
 import passport from "passport"
 import config from "./config/config.js"
+import { addLogger } from "./config/logger.js"
 
 const app = express ()
 
@@ -45,6 +47,8 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static(__dirname + "/public"))
 
+app.use(addLogger);
+
 
 app.use('/api/productos', productosroutes);
 app.use('/api/carrito', carritoroutes);
@@ -54,9 +58,12 @@ app.use('/', viewsroutes);
 
 //mocking
 app.use('/api/mockingproducts', mokingRouter);
+//logger
+app.use('/loggerTest', loggerTestroutes);
 
 
 app.listen(PORT, () => {
+    
     console.log(`Servidor abierto en el puerto ${PORT}`);
 });
 

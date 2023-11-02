@@ -11,7 +11,7 @@ export const getVerCarrito = async(req,res) =>{
     return  res.send ( carritoTotal)
 }
 
-// listo 
+// listo .... ver q tengoq  cambiar q si el producto ya exsiste no volver a agregar 
 export const postAgregarACarrito = async (req, res) => {
     let nuevoProducto = req.body
     if (!nuevoProducto.codigo){
@@ -21,6 +21,7 @@ export const postAgregarACarrito = async (req, res) => {
             code: EErrors.INVALID_TYPES_ERROR
         })
     }
+
     await carritoService.agregarAlCarrito(nuevoProducto)
     res.send("se agrego el producto con codigo " + nuevoProducto.codigo + " al carrito")
     // no entiendo porque me dejo de entrar al populate , hace 5 minutos lo probe y andaba
@@ -53,17 +54,7 @@ export const postSumarCantidadCarrito = async (req, res) => {
 
 }
 
-/*falta este
-y con eso le meto un bucle para agregar esa cantidad , sino no me deja cambiar porque tiene un array adentro q me da un id unico en ese */
-/*export const putModificarCantidad = async (req, res) => {
-    let cantidadCambiada = req.body
-    console.log(cantidadCambiada);
-    console.log(req.params.id);
-    let productoCarritpModificado = await carritoModelo.findOne({_id : req.params.id})//,{$set : cantidadCambiada})
-    //console.log(cantidadCambiada);    
-    console.log(productoCarritpModificado);
-    res.send({status: "completado" , message: `se actualizo la compra con el id ${req.params.id}`, data : productoCarritpModificado})
-}*/
+
 //listo
 export const deleteEliminarProducto = async (req, res) => {
     let id = req.params.id
